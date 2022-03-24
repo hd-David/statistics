@@ -4,7 +4,7 @@ import csv, pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 big_data = []
-with open("SmallData.csv", "r") as file:
+with open("BigData1.csv", "r") as file:
     file_reader = csv.DictReader(file)
     for data in file_reader:
         big_data.append(data)
