@@ -30,11 +30,10 @@ def most_populated_country(year):
    
 
 """
-    Find the countries with the population above ten million based on the year provided.
+    Find the countries with the population above what the user provides based on the year provided.
     Inputs: year, population
     Output : list of dictionaries
-    What the function is doing: filtering all the countries with populations above ten
-    million.
+    What the function is doing: filtering all the countries with populations above the user want to check.
 """
 @app.route("/populations/<years>/<population>")
 def population_above(years, population):
@@ -51,9 +50,9 @@ def population_above(years, population):
 
 """ 
     Checking the country with big land
-    Inputs : series code 
+    Inputs : year
     Output: list of dictionaries
-    What the function is doing: filtering the land with big surface area
+    What the function is doing: filtering the the country with big surface area
 """
 @app.route("/country/<year>")
 def couuntry_with_big_land(year):
@@ -65,14 +64,13 @@ def couuntry_with_big_land(year):
     return jsonify(max_value2)
 
 
-""" Finding the population growth from 2015 to 2021
-     Inputs : first year and last year, country
+""" 
+     Inputs : first year and last year
      Outputs : list of dictionary
-     What the function is doing: calculating the population growth between the year
-2015 upto 2021.
+     What the function is doing: calculating the population growth between  two years entered by the user.
  """
 @app.route("/growth/<country>/<year1>/<year2>")
-def population_growth(country,year1,year2):
+def population_growth(year1,year2):
     total_growth = []
     for growth in big_data:
         if growth["SeriesCode"] == "SP.POP.TOTL":
@@ -83,21 +81,6 @@ def population_growth(country,year1,year2):
         pop_growth = ((int(pop[year1])- int(pop[year2])) / int(pop[year2])) *100
         float(pop_growth)
     return jsonify(pop_growth)
-
-
-"""
-    Inputs : years( two or more years)
-    Output : list of dictionary
-    What the function is doing: the function is comparing the GDP growth maybe for
-    the past two years and return the country with the lowest GDP growth rate.
-"""
-@app.route("/GDP-growth/<SeriesCode>/<year>")
-def GDP_growth(SeriesCode):
-    SeriesCode_data = []
-    for data in big_data:
-        if data["SeriesCode"] == SeriesCode:
-            SeriesCode_data.append(data)
-    return jsonify(SeriesCode_data)
 
 
 """
