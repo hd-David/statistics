@@ -12,18 +12,17 @@ with open("SmallData.csv", "r") as file:
 app = Flask(__name__)
 
 """
-    Finding the most populated country
-    The inputs: year.
-    The output: list of dictionaries.
-    What the function is doing: filtering the country with highest population or
+    Inputs: year.
+    Outputs: list of dictionaries.
+    What the function is doing: filtering the country with highest statistcs or
     maximum value based on the which year they enter.
     build a new list after filtering and then find the maximum value from the filtered list.
 """
-@app.route("/highest/<year>")
-def most_populated_country(year):
+@app.route("/highest/<SeriesCode>/<year>")
+def highest_country(SeriesCode,year):
     filtered_list = []
     for populated in big_data:
-        if populated["SeriesCode"] == "SP.POP.TOTL":
+        if populated["SeriesCode"] == SeriesCode:
             filtered_list.append(populated)
     max_value = max(filtered_list, key=lambda x:x[year])
     return jsonify(max_value)   
