@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-import csv, pprint
+import csv, pprint, ast
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -12,11 +12,11 @@ with open("BigData1.csv", "r") as file:
 app = Flask(__name__)
 
 """
-    Inputs: year.
-    Outputs: list of dictionaries.
-    What the function is doing: filtering the country with highest statistcs or
-    maximum value based on the which year they enter.
-    build a new list after filtering and then find the maximum value from the filtered list.
+Filtering the country with highest statistics or maximum value based on year amd SeriesCode.
+Inputs:
+    year (int): any year can be used in this function.
+    SeriesCode (str): any series code can be used to find the highest statistics the user is looking for.
+Outputs: List of dictionaries in json format containing filtered data.
 """
 @app.route("/highest/<SeriesCode>/<year>")
 def highest_country(SeriesCode,year):
@@ -29,10 +29,11 @@ def highest_country(SeriesCode,year):
    
 
 """
-    Find the countries with the population above what the user provides based on the year provided.
-    Inputs: year, population
-    Output : list of dictionaries
-    What the function is doing: filtering all the countries with populations above the user want to check.
+filtering all the countries with populations above the user's input.
+Inputs: 
+    year (int) whichever year the users choose to use.
+    population (int) it is the number entered by the user.
+Output : list of dictionaries in json format containing filtered data.
 """
 @app.route("/populations/<years>/<population>")
 def population_above(years, population):
@@ -46,46 +47,31 @@ def population_above(years, population):
             countries_above_ten.append(populate)
     return jsonify(countries_above_ten)      
 
-
 """ 
-    Checking the country with big land
-    Inputs : year
-    Output: list of dictionaries
-    What the function is doing: filtering the the country with big surface area
+Calculating the statistics growth between  two years entered by the user.
+Inputs : tow different years ( str),probably the previous and current year
+Outputs : statistics growth (float)
 """
-@app.route("/country/<year>")
-def couuntry_with_big_land(year):
-    big_area = []
-    for big_land in big_data:
-        if big_land["SeriesCode"] == "AG.SRF.TOTL.K2":
-            big_area.append(big_land)
-    max_value2 =max(big_area, key=lambda x:x[year])
-    return jsonify(max_value2)
-
-
-""" 
-     Inputs : first year and last year
-     Outputs : list of dictionary
-     What the function is doing: calculating the population growth between  two years entered by the user.
- """
-@app.route("/growth/<country>/<year1>/<year2>")
-def population_growth(year1,year2):
+@app.route("/statistics-growth/<SeriesCode>/<year1>/<year2>")
+def statistics_growth(SeriesCode,year1,year2):
     total_growth = []
     for growth in big_data:
-        if growth["SeriesCode"] == "SP.POP.TOTL":
+        if growth["SeriesCode"] == SeriesCode:
             total_growth.append(growth) 
-            #pp.pprint(total_growth)
     for pop in total_growth:
-        pp.pprint(pop)
-        pop_growth = ((int(pop[year1])- int(pop[year2])) / int(pop[year2])) *100
-        float(pop_growth)
+        try:
+            pop_growth = ((ast.literal_eval(pop[year1])- ast.literal_eval(pop[year2])) / ast.literal_eval(pop[year2])) *100
+        except: # using error handling due to the fact that some statistics do not have values
+            print(pop)
     return jsonify(pop_growth)
 
 
 """
-    Inputs: country name, year, seriescode
-    Outputs: list of dictionaries in json format
-    what the function is doing: it is filtering by country name and Series code provided by the user
+what the function is doing: it is filtering by country name and Series code provided by the user
+Inputs: 
+    countryCode (type of str) Country code is the abbreviation of the countries name
+    seriescode(type of str)   series code is the code to identify the different number of statistics.
+Outputs: list of dictionaries in json format containing filtered data.
 """
 @app.route("/filter-by-country/<CountryCode>/<SeriesCode>")
 def filter_by_country(CountryCode,SeriesCode):
