@@ -9,8 +9,6 @@ The third Endpoint is Calculating the statistics growth between  two years enter
 
 The four Endpoint is Filtering by country name and Series code provided by the user, the function will only return the statistics that is matching the user's seriescode and the country that is matching the country code.
  
-<<<<<<< HEAD
  In requirements.txt- there is only flask as our requirement
-
 
  In the csv file is the data of our statistics.
