@@ -12,11 +12,12 @@ with open("BigData1.csv", "r") as file:
 app = Flask(__name__)
 
 """
-Filtering the country with highest statistics or maximum value based on year amd SeriesCode.
+Filtering the country with highest statistics or maximum value based on year and SeriesCode.
 Inputs:
     year (int): any year can be used in this function.
     SeriesCode (str): any series code can be used to find the highest statistics the user is looking for.
-Outputs: List of dictionaries in json format containing filtered data.
+Outputs:
+    List of dictionaries in json format containing filtered data.
 """
 @app.route("/highest/<SeriesCode>/<year>")
 def highest_country(SeriesCode,year):
@@ -33,7 +34,8 @@ filtering all the countries with populations above the user's input.
 Inputs: 
     year (int) whichever year the users choose to use.
     population (int) it is the number entered by the user.
-Output : list of dictionaries in json format containing filtered data.
+Output : 
+    list of dictionaries in json format containing filtered data.
 """
 @app.route("/populations/<years>/<population>")
 def population_above(years, population):
@@ -49,8 +51,10 @@ def population_above(years, population):
 
 """ 
 Calculating the statistics growth between  two years entered by the user.
-Inputs : tow different years ( str),probably the previous and current year
-Outputs : statistics growth (float)
+Inputs : 
+    two different years ( str) the previous and current year
+Outputs : 
+    statistics growth (float)
 """
 @app.route("/statistics-growth/<SeriesCode>/<year1>/<year2>")
 def statistics_growth(SeriesCode,year1,year2):
@@ -67,11 +71,12 @@ def statistics_growth(SeriesCode,year1,year2):
 
 
 """
-what the function is doing: it is filtering by country name and Series code provided by the user
+Filtering by country name and Series code provided by the user
 Inputs: 
     countryCode (type of str) Country code is the abbreviation of the countries name
-    seriescode(type of str)   series code is the code to identify the different number of statistics.
-Outputs: list of dictionaries in json format containing filtered data.
+    seriescode(type of str)   Series code is the code to identify the different number of statistics.
+Outputs: 
+    list of dictionaries in json format containing filtered data.
 """
 @app.route("/filter-by-country/<CountryCode>/<SeriesCode>")
 def filter_by_country(CountryCode,SeriesCode):
