@@ -7,7 +7,6 @@ Aruba,ABW,Poverty headcount ratio at national poverty lines (% of population),SI
 Aruba,ABW,Poverty headcount ratio at $1.90 a day (2011 PPP) (% of population),SI.POV.DDAY,0,0,0,0,0,0,0,0,0,0,0,0
 Aruba,ABW,"GNI, Atlas method (current US$)",NY.GNP.ATLS.CD,760302230.6,1817009854,2290680023,2412460160,2528399467,2630866335,2770959446,2814340575,2857452095,0,0,0
 Aruba,ABW,"GNI per capita, Atlas method (current US$)",NY.GNP.PCAP.CD,12230,20000,22450,23520,24510,25350,26560,26840,27120,0,0,0
-Aruba,ABW,"GNI, PPP (current international $)",NY.GNP.MKTP.PP.CD,1433011287,2872847339,3163613121,3285168876,3570231618,3676163463,3729158904,3762761748,3872058694,0,0,0
 Aruba,ABW,"GNI per capita, PPP (current international $)",NY.GNP.PCAP.PP.CD,23060,31620,31000,32030,34610,35420,35740,35880,36750,0,0,0
 Aruba,ABW,Income share held by lowest 20%,SI.DST.FRST.20,0,0,0,0,0,0,0,0,0,0,0,0
 Aruba,ABW,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,73.468,73.787,75.158,75.299,75.441,75.583,75.725,75.868,76.01,76.152,76.293,0
