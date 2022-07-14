@@ -37,17 +37,6 @@ Inputs:
 Output : 
     list of dictionaries in json format containing filtered data.
 """
-@app.route("/populations/<years>/<population>")
-def population_above(years, population):
-    countries_above_ten = []
-    filtered_list = []
-    for popular in big_data:
-        if popular["SeriesCode"] == "SP.POP.TOTL":
-            filtered_list.append(popular)
-    for populate in filtered_list:
-        if populate[years] > population:
-            countries_above_ten.append(populate)
-    return jsonify(countries_above_ten)      
 
 """ 
 Calculating the statistics growth between  two years entered by the user.
@@ -86,3 +75,4 @@ def filter_by_country(CountryCode,SeriesCode):
             if data["SeriesCode"] == SeriesCode:
                 country_data.append(data)                  
     return jsonify(country_data)
+
