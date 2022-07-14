@@ -86,3 +86,12 @@ def filter_by_country(CountryCode,SeriesCode):
             if data["SeriesCode"] == SeriesCode:
                 country_data.append(data)                  
     return jsonify(country_data)
+
+
+@app.route('/filter/<CountryCode>')
+def filterCountry(CountryCode):
+    count =[]
+    for data in big_data:
+        if data["CountryCode"] == CountryCode:
+            count.append(data)
+    return jsonify(count)
